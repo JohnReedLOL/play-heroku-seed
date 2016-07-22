@@ -1,0 +1,1 @@
+web: target/universal/stage/bin/play-heroku-seed -Dhttp.port=${PORT} -DapplyEvolutions.default=true -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url="jdbc:postgresql://postgresqldatabase.c3p4ojrqatcp.us-east-1.rds.amazonaws.com:5432/play_heroku_seed" -Dplay.crypto.secret=${?APPLICATION_SECRET}
