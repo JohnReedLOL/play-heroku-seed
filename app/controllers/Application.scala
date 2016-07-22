@@ -46,17 +46,20 @@ object Application extends Controller {
 
 	def matt = Action { (request: Request[AnyContent]) =>
 
-    /*
+
     val fiveSecondCookieOp = request.cookies.get("5secondcookie")
     val foreverCookieOp = request.cookies.get("forevercookie")
 
     val fiveSecondCookie = fiveSecondCookieOp.getOrElse(default5secCookie)
     val foreverCookie = foreverCookieOp.getOrElse(defaultForeverCookie)
-    */
+
     val sessionCount = request.session.get("count").getOrElse("0").toInt // the count stored in the session
 		Ok(views.html.mattindex("Matt's Game")(request))
       .withSession(
         request.session + ("count" -> (sessionCount + 1).toString )
-      )
+      ).withCookies(
+      fiveSecondCookie.copy(value = (fiveSecondCookie.value.toInt+1).toString ),
+      foreverCookie.copy(value = (foreverCookie.value.toInt+1).toString )
+    )
 	}
 }

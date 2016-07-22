@@ -3,9 +3,9 @@
 @main("Hi Matt") {
 <div class="container">
     <h1>@title</h1>
-    @*<p>short-term cookie: @(request.cookies.get("5secondcookie"))</p>*@
-    <p> refresh the page to increase the count </p>
+    <p>refresh the page to increase the count </p>
     <p>session cookie count: @(request.session.get("count").getOrElse("0"))</p>
-    @*<p>forever cookie: @(request.cookies.get("forevercookie"))</p>*@
+    <p>short-term cookie count: @(request.cookies.get("5secondcookie").getOrElse("0"))</p>
+    <p>forever cookie: @(request.cookies.get("forevercookie").getOrElse("0"))</p>
 </div>
 }
