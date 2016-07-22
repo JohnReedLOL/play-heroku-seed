@@ -89,3 +89,5 @@ If you modify the application name in the Procfile, make sure you update the app
 - Model improvements/refinement
 . [test](https://play-heroku-seed.herokuapp.com/)
 [![Build Status](https://travis-ci.org/JohnReedLOL/play-heroku-seed.svg?branch=master)](https://travis-ci.org/JohnReedLOL/play-heroku-seed)
+
+.
