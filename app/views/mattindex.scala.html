@@ -3,11 +3,9 @@
 @main("Hi Matt") {
 <div class="container">
     <h1>@title</h1>
-    <p>TODO</p>
-    <ul>
-    @for(pair <- request.session.data) {
-    <li>@(pair)</li>
-    }
-    </ul>
+    @*<p>short-term cookie: @(request.cookies.get("5secondcookie"))</p>*@
+    <p> refresh the page to increase the count </p>
+    <p>session cookie count: @(request.session.get("count").getOrElse("0"))</p>
+    @*<p>forever cookie: @(request.cookies.get("forevercookie"))</p>*@
 </div>
 }
