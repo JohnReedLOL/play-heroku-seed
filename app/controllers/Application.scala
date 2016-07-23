@@ -35,7 +35,7 @@ object Application extends Controller {
     Ok(views.html.fileuploader("upload")(request))
   }
 
-  def upload = Action(parse.multipartFormData) { request =>
+  def upload = Action(parse.multipartFormData) { (request: Request[MultipartFormData[TemporaryFile]]) =>
     request.body.file("picture").map { (picture: FilePart[TemporaryFile]) =>
       import java.io.File
       val filename: String = picture.filename
@@ -47,19 +47,17 @@ object Application extends Controller {
       } catch {
         case e: Exception => "cannot get full path: " + e
       }
-      val canonicalPath = try {
-        newFile.getCanonicalPath
+      val fileSize: Long = try {
+        newFile.length
       } catch {
-        case e: Exception => "cannot get canonical path: " + e
+        case e: Exception => -1L
       }
-      Ok("File uploaded: " + filename + " of type: " + contentType
-        + "\nIn: " + newFile.getPath
-        + "\nFullPath: " + fullPath
-        + "\nCanonicalPath: " + canonicalPath)
+      val info = "File uploaded: " + filename + " of type: " + contentType + "<br> FileSize: " + fileSize
+      Ok( views.html.imageupload(info)(newFile.getPath)(fullPath)(request) )
     }.getOrElse {
       Redirect(routes.Application.index).flashing(
         "error" -> "Missing file")
-    }
+    } // /home/johnreed/Desktop/Apps/play-heroku-seed/app/views/imageupload.scala.html
   }
 
   /**

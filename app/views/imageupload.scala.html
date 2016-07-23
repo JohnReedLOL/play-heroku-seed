@@ -1,0 +1,15 @@
+@(info: String)(shortURL: String)(longURL: String)(request: Request[play.api.mvc.MultipartFormData[play.api.libs.Files.TemporaryFile]])
+
+@main("Upload Complete") {
+<div class="container">
+    <h1>You uploaded something! </h1>
+    <p> @Html(info) </p>
+    <p>location: @shortURL</p>
+    <p>full location: @longURL</p>
+    <p>Image take 1: </p>
+    <img src="@shortURL" alt="Take1">
+    <p>Image take 2: </p>
+    <img src="@longURL" alt="Take2">
+    <p>originating from request: @(request)</p>
+</div>
+}
