@@ -5,6 +5,10 @@
 # Matt page
 GET     /matt                           controllers.Application.matt
 
+GET     /uploadform                           controllers.Application.uploadform
+
+POST     /upload                           controllers.Application.upload
+
 # Home page
 GET     /                           controllers.Application.index
 

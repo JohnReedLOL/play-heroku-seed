@@ -1,0 +1,15 @@
+@(title: String)(request: Request[AnyContent])
+
+@main(title) {
+
+    @helper.form(action = routes.Application.upload, 'enctype -> "multipart/form-data") {
+
+    <input type="file" name="picture">
+
+    <p>
+        <input type="submit">
+    </p>
+
+    }
+
+}

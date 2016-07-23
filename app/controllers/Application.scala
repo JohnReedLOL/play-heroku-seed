@@ -11,7 +11,9 @@ import play.api.Play.current
 import scala.slick.driver.PostgresDriver.simple._
 import models.User
 import models.Users
+import play.api.libs.Files.TemporaryFile
 import play.api.mvc.Cookie
+import play.api.mvc.MultipartFormData.FilePart
 
 import scala.annotation.tailrec
 
@@ -28,6 +30,23 @@ object Application extends Controller {
 	def index = Action {
 		Ok(views.html.index(Users.all))
 	}
+
+  def uploadform = Action { request =>
+    Ok(views.html.fileuploader("upload")(request))
+  }
+
+  def upload = Action(parse.multipartFormData) { request =>
+    request.body.file("picture").map { (picture: FilePart[TemporaryFile]) =>
+      import java.io.File
+      val filename: String = picture.filename
+      val contentType: Option[String] = picture.contentType
+      picture.ref.moveTo(new File(s"public/upload/$filename")) // file should be relative to project root.
+      Ok("File uploaded")
+    }.getOrElse {
+      Redirect(routes.Application.index).flashing(
+        "error" -> "Missing file")
+    }
+  }
 
   /**
     * An HTTP cookie.
