@@ -17,3 +17,5 @@ dist
 secretstuff
 .secretstuff
 public/upload
+!/*.png
+!/*.jpg
