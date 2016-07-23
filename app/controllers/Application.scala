@@ -40,8 +40,9 @@ object Application extends Controller {
       import java.io.File
       val filename: String = picture.filename
       val contentType: Option[String] = picture.contentType
-      picture.ref.moveTo(new File(s"public/upload/$filename")) // file should be relative to project root.
-      Ok("File uploaded")
+      val newFile = new File(s"$filename")
+      picture.ref.moveTo(newFile) // file should be relative to project root.
+      Ok("File uploaded: " + filename + " of type: " + contentType + "\nIn: " + newFile.getPath)
     }.getOrElse {
       Redirect(routes.Application.index).flashing(
         "error" -> "Missing file")
