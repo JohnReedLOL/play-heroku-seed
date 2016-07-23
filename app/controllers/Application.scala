@@ -42,7 +42,20 @@ object Application extends Controller {
       val contentType: Option[String] = picture.contentType
       val newFile = new File(s"$filename")
       picture.ref.moveTo(newFile) // file should be relative to project root.
-      Ok("File uploaded: " + filename + " of type: " + contentType + "\nIn: " + newFile.getPath)
+      val fullPath = try {
+        newFile.getAbsolutePath
+      } catch {
+        case e: Exception => "cannot get full path: " + e
+      }
+      val canonicalPath = try {
+        newFile.getCanonicalPath
+      } catch {
+        case e: Exception => "cannot get canonical path: " + e
+      }
+      Ok("File uploaded: " + filename + " of type: " + contentType
+        + "\nIn: " + newFile.getPath
+        + "\nFullPath: " + fullPath
+        + "\nCanonicalPath: " + canonicalPath)
     }.getOrElse {
       Redirect(routes.Application.index).flashing(
         "error" -> "Missing file")
