@@ -25,3 +25,6 @@ GET  /users/:id             		controllers.UsersController.show(id: Int)
 POST  /users/:id             		controllers.UsersController.update(id: Int)
 GET   /users/:id/edit				controllers.UsersController.edit(id: Int)
 POST  /users/:id/delete				controllers.UsersController.delete(id: Int)
+
+# GET     /amazons3                           controllers.Application2.index()
+# POST    /amazons3                           controllers.Application2.upload()
