@@ -1,8 +1,8 @@
 @(users: List[User])
 
-@main("Listing users") {
+@main("Listing comments") {
 	<div class="container">
-	    <h1>users: @users.length </h1>
+	    <h1>Comments: @users.length </h1> <!-- This used to be users -->
 	    <a href="@routes.UsersController.add" class="btn btn-primary">Add Comment</a>
 	    <table class="table table-striped">
 		    <thead>
@@ -17,7 +17,7 @@
 				@for(user <- users) {
 				<tr>
 					<td>@user.id</td>
-					<td>@user.name</td>
+					<td>@user.comment</td>
 						@user.id.map { id =>
 							<td><a href="@routes.UsersController.edit(id)" class="btn btn-warning" type="submit">Edit</button></td>
 							<td>@helper.form(routes.UsersController.delete(id)){<button class="btn btn-danger" type="submit">Delete</button>}</li></td>

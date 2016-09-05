@@ -5,15 +5,15 @@ import play.api.Play.current
 import play.api.data.Forms._
 
 
-case class User(name: String, id: Option[Int] = None)
+case class User(comment: String, id: Option[Int] = None)
 class Users(tag: Tag) extends Table[User](tag, "USERS") {
   // Auto Increment the id primary key column
   def id = column[Int]("ID", O.PrimaryKey, O.AutoInc)
   // The name can't be null
-  def name = column[String]("NAME", O.NotNull)
+  def comment = column[String]("NAME", O.NotNull) // this used to be "name"
   // the * projection (e.g. select * ...) auto-transforms the tupled
   // column values to / from a User
-  def * = (name, id.?) <> (User.tupled, User.unapply)
+  def * = (comment, id.?) <> (User.tupled, User.unapply)
 }
 
 object Users {

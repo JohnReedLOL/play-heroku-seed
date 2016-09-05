@@ -28,6 +28,10 @@ object Application extends Controller {
   }
 
 	def index = Action {
+    val users: List[User] = Users.all
+    for(user: User <- users) {
+      user.comment // dead code just to make sure value exists
+    }
 		Ok(views.html.index(Users.all))
 	}
 

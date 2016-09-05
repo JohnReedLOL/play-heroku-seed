@@ -16,7 +16,7 @@ import models.Users
 object UsersController extends Controller {
 	val userForm = Form(
 	    mapping(
-	        "name" -> text,
+	        "comment" -> text,
 	        "id" -> optional(number)
 	)(User.apply)(User.unapply))
   	def index = Action {
